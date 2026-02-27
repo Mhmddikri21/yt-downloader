@@ -206,8 +206,8 @@ export default function Home() {
                       setSelectedFormat(videoInfo.formats.videoWithAudio[0]);
                     }}
                     className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-semibold transition-all ${activeTab === "video"
-                        ? "bg-neutral-800 text-white shadow-sm"
-                        : "text-neutral-500 hover:text-white"
+                      ? "bg-neutral-800 text-white shadow-sm"
+                      : "text-neutral-500 hover:text-white"
                       }`}
                   >
                     <Video className="w-5 h-5" /> Video
@@ -218,8 +218,8 @@ export default function Home() {
                       setSelectedFormat(videoInfo.formats.audioOnly[0]);
                     }}
                     className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-semibold transition-all ${activeTab === "audio"
-                        ? "bg-neutral-800 text-white shadow-sm"
-                        : "text-neutral-500 hover:text-white"
+                      ? "bg-neutral-800 text-white shadow-sm"
+                      : "text-neutral-500 hover:text-white"
                       }`}
                   >
                     <Music className="w-5 h-5" /> Audio Only
@@ -227,21 +227,26 @@ export default function Home() {
                 </div>
 
                 {/* Format selection grids */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-64 overflow-y-auto pr-2 pb-2">
                   {activeTab === "video"
                     ? videoInfo.formats.videoWithAudio.map((format) => (
                       <button
                         key={format.itag}
                         onClick={() => setSelectedFormat(format)}
                         className={`flex flex-col items-center justify-center p-4 rounded-xl border transition-all ${selectedFormat?.itag === format.itag
-                            ? "bg-rose-500/10 border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.15)]"
-                            : "bg-neutral-900 border-white/5 hover:border-white/20 hover:bg-neutral-800"
+                          ? "bg-rose-500/10 border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.15)]"
+                          : "bg-neutral-900 border-white/5 hover:border-white/20 hover:bg-neutral-800"
                           }`}
                       >
-                        <span className={`font-bold text-lg mb-1 ${selectedFormat?.itag === format.itag ? 'text-rose-400' : 'text-white'}`}>
+                        <span className={`font-bold text-lg mb-1 flex items-center gap-1 ${selectedFormat?.itag === format.itag ? 'text-rose-400' : 'text-white'}`}>
                           {format.qualityLabel || "Unknown"}
+                          {!format.hasAudio && (
+                            <span title="No Audio" className="bg-orange-500/20 text-orange-400 text-[10px] px-1.5 py-0.5 rounded-sm font-bold ml-1">
+                              MUTE
+                            </span>
+                          )}
                         </span>
-                        <span className="text-xs text-neutral-500 font-medium">
+                        <span className="text-xs text-neutral-500 font-medium text-center">
                           {format.container.toUpperCase()} • {formatBytes(format.contentLength)}
                         </span>
                       </button>
@@ -251,8 +256,8 @@ export default function Home() {
                         key={format.itag}
                         onClick={() => setSelectedFormat(format)}
                         className={`flex flex-col items-center justify-center p-4 rounded-xl border transition-all ${selectedFormat?.itag === format.itag
-                            ? "bg-indigo-500/10 border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.15)]"
-                            : "bg-neutral-900 border-white/5 hover:border-white/20 hover:bg-neutral-800"
+                          ? "bg-indigo-500/10 border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.15)]"
+                          : "bg-neutral-900 border-white/5 hover:border-white/20 hover:bg-neutral-800"
                           }`}
                       >
                         <span className={`font-bold text-lg mb-1 ${selectedFormat?.itag === format.itag ? 'text-indigo-400' : 'text-white'}`}>
